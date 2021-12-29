@@ -5,6 +5,7 @@ from reader import available_sheets_name
 from reader.read_template import read_template, template_to_mask
 
 def find_element_sample_adress(path: str, lab: str, template_name: str):
+    # Поиск в протколе заголовка колонны замеров по элементу
     wb = load_workbook(path)
     template = read_template(lab, template_name)
     for ws in wb.worksheets:
@@ -12,6 +13,7 @@ def find_element_sample_adress(path: str, lab: str, template_name: str):
         element_addresses = finding(ws, template)
         if element_addresses is not None:
             return element_addresses
+    wb.close()
     return None
 
 def finding(ws: Worksheet, template: json):
@@ -19,21 +21,26 @@ def finding(ws: Worksheet, template: json):
     element_addresses = []
     for el in elements:
         el_template = elements[el]
-        row, col = find_header(ws, el_template)
+        header_addresses = find_header(ws, el_template)
 
-        if row is not None:
-            addresses = find_samples(ws, row, col, template['SAMPLE'])
-            element_addresses.append({
-                'element': el,
-                'addresses': addresses,
-                'value_column': col
-            })
+        if header_addresses is not None:
+
+            for address in header_addresses:
+                row = address['row']
+                col = address['col']
+                addresses = find_samples(ws, row, col, template['SAMPLE'])
+                element_addresses.append({
+                    'element': el,
+                    'addresses': addresses,
+                    'value_column': col
+                })
 
     if len(element_addresses) == 0: return None
 
     return element_addresses
 
 def find_header(ws: Worksheet, template: json, r: int = 1, c: int = 1):
+    header_addresses = []
     for header in template['HEADER']:
         header = str(header).strip().upper()
         for row in range(r, ws.max_row):
@@ -43,14 +50,23 @@ def find_header(ws: Worksheet, template: json, r: int = 1, c: int = 1):
                 if ws.cell(row, col).value is None: continue
                 value = str(ws.cell(row, col).value).strip().upper()
 
+                # Тут может быть два случаея, когда заголовок имеет подзаголовок и нет.
+                # В слуае когда есть подзаголвок, то нужно рекурсивно найти последний подзаголвоок
+
                 if header == value and template['SUBHEADER'] != '0':
-                    row, col = find_header(ws, template['SUBHEADER'], row, col)
-                    return row, col
+                    _header_addresses = find_header(ws, template['SUBHEADER'], row, col)
+                    header_addresses.append({
+                        'row': _header_addresses[0]['row'],
+                        'col': _header_addresses[0]['col']
+                    })
 
                 elif header == value and template['SUBHEADER'] == '0':
-                    return row, col
+                    header_addresses.append({
+                        'row': row,
+                        'col': col
+                    })
 
-    return None, None
+    return header_addresses
 
 def find_samples(ws: Worksheet, r: int, c:int, template: json):
     for i in range(len(template['TEMPLATE'])):
@@ -77,6 +93,7 @@ def find_samples(ws: Worksheet, r: int, c:int, template: json):
         if _flag: break
 
     if _column == -1: return None
+
     # читать пока в столбце номера проб соответсвуют шаблону
     finded_address = []
     _flag = True
@@ -92,8 +109,8 @@ def find_samples(ws: Worksheet, r: int, c:int, template: json):
                     'col': _column,
                     'ws_name': ws.title
                 })
-                
                 _not_found = False
+                break
 
         if _not_found:
             _flag = False

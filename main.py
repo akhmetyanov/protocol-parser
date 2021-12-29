@@ -7,13 +7,11 @@ from write_to_server import write_results
 
 
 paths = [
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 96-21 ц СЯХТМ к заказу 02 СЯХТМ0525.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 97-21 ц СЯХТМ к заказу 02 СЯХТМ0551.xlsx"
+    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Протокол №67-21СЕРЕБ.xlsx"
 ]
 
 lab = 'LB40'
-# template_name = 'LB_40_PACY'
-template_name = 't'
+template_name = 'LB_40_PA'
 
 def main():
     for path in paths:

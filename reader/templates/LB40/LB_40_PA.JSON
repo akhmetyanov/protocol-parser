@@ -1,64 +1,63 @@
 {
     "PROT":{
         "NUMBER": {
-            "SEARCH": ["ОТЧЁТ №"],
+            "SEARCH": ["ПРОТОКОЛ №"],
             "AFTER": ["№"],
-            "WRONG": [],
+            "WRONG": ["страница"],
             "TEMPLATE": 
                 [
-                    "88-21ц",
-                    "100-21ц"
+                    "67-21СЕРЕБ"
                 ]
         },
         "DATE":{
-            "SEARCH": ["Дата окончания анализа"],
-            "AFTER": ["анализа"],
+            "SEARCH": ["Дата окончания анализа:"],
+            "AFTER": ["анализа:"],
             "WRONG": [],
             "TEMPLATE": 
                 [
-                    "00/00/0000"
+                    "00/00/0000",
+                    "00.00.0000"
                 ]
         }
     },
     "ORDER":{
         "NUMBER": {
             "SEARCH": ["Заказ:"],
-            "AFTER": ["№"],
+            "AFTER": ["Заказ:"],
             "WRONG": [],
             "TEMPLATE": 
                 [
-                    "02 СЯХТМ00511",
-                    "02-СЯХТМ00511",
-                    "02 СЯХТМ0511",
-                    "02-СЯХТМ0511"
+                    "01СЕРЕБ0349"
                 ]
         },
         "DATE":{
-            "SEARCH": ["Дата поступления проб"],
-            "AFTER": ["проб"],
+            "SEARCH": ["Дата поступления проб:"],
+            "AFTER": ["проб:"],
             "WRONG": [],
             "TEMPLATE": 
                 [
-                    "00/00/0000"
+                    "00/00/0000",
+                    "00.00.0000"
                 ]
         }
     },
     "SAMPLE":{
         "TEMPLATE": [
             "ZUAA-A2100407307",
+            "ZUAA-A2100421371",
             "3060006"
         ]
     },
     "ELEMENTS": {
-        "AUC":{
+        "AU":{
             "HEADER": ["Золото, г/т"],
             "SUBHEADER": {
-                "HEADER": ["Результат анализа цианированием"],
+                "HEADER": ["Результат анализа"],
                 "SUBHEADER": "0"
             },
             "UNIT": "PPM",
-            "LAB_METHOD": "PACY",
-            "GENERIC_METHOD": "PACY",
+            "LAB_METHOD": "PA",
+            "GENERIC_METHOD": "PA",
             "RULES": [
                 {
                     "compare": "full", 
@@ -66,6 +65,13 @@
                     "value": "**",
                     "replaceValue":"",
                     "exlcude": 1
+                },
+                {
+                    "compare": "include", 
+                    "operation": "replace", 
+                    "value": "менее",
+                    "replaceValue":"<",
+                    "exlcude": 0
                 },
                 {
                     "compare": "include", 
@@ -83,10 +89,10 @@
                 }
             ]
         },
-        "AGC":{
+        "AG":{
             "HEADER": ["Серебро, г/т"],
             "SUBHEADER": {
-                "HEADER": ["Результат анализа цианированием"],
+                "HEADER": ["Результат анализа"],
                 "SUBHEADER": "0"
             },
             "UNIT": "PPM",
@@ -99,6 +105,13 @@
                     "value": "**",
                     "replaceValue":"",
                     "exlcude": 1
+                },
+                {
+                    "compare": "include", 
+                    "operation": "replace", 
+                    "value": "менее",
+                    "replaceValue":"<",
+                    "exlcude": 0
                 },
                 {
                     "compare": "include", 

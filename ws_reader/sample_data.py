@@ -9,6 +9,9 @@ def read(addresses: list, path: str):
 
     for element in addresses:
         _addresses = element['addresses']
+
+        if _addresses is None: continue
+
         _element = element['element']
         _value_column = element['value_column']
 
@@ -27,7 +30,7 @@ def read(addresses: list, path: str):
                 'ns': ns,
                 'value': value,
             })
-
+    wb.close()
     return datas
 
 def rules(datas: list, lab: str, template_name: str):
@@ -45,9 +48,13 @@ def rules(datas: list, lab: str, template_name: str):
         # if value == '**':
         #     print(value)
 
+        # if 'менее' in value:
+        #     print(value)
+
         for r in template['ELEMENTS'][name]['RULES']:
             value2 = rule_to_value(r, value, operations)
             if value2 is not None:
+                value = value2
                 datas[i]['value2'] = value2
                 datas[i]['exlcude'] = r['exlcude']
             
@@ -64,23 +71,24 @@ def rule_to_value(rule: dict, value: str, operations: dict):
         
         if value.strip() == rule['value']:
             f = operations[rule['operation']]
-            _value = f(value,  rule['replaceValue'])
+            _value = f(value,  rule['replaceValue'], rule['value'])
 
     elif rule['compare'] == 'include':
 
         if  rule['value'] in value:
             f = operations[rule['operation']]
-            _value = f(value,  rule['replaceValue'])
+            _value = f(value,  rule['replaceValue'], rule['value'])
 
     return _value
 
-def devide(value: str, by: str):
+def devide(value: str, by: str, r: str):
     value = value.replace(',','.')
-    value = int(value)
-    by = int(by)
+    value = value.replace(r,'')
+    value = float(value.strip())
+    by = float(by)
     value = value/by
-    return value
+    return str(value)
 
-def replace(old: str, new: str):
-    old = old.replace(old, new)
-    return old
+def replace(value: str, new: str, old: str):
+    value = value.replace(old, new)
+    return value

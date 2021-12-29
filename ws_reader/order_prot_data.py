@@ -21,7 +21,7 @@ def find_order_prot_data(path: str, lab: str, template_name: str):
     
     prot_date = str_to_date(prot_date)
     order_date = str_to_date(order_date)
-
+    wb.close()
     return prot_num, prot_date, order_num, order_date
 
 def read_rows(ws: Worksheet, template: json):

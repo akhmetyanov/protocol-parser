@@ -1,64 +1,120 @@
 {
-    "define_prot_number":{
-        "key_words":[
-            "ОТЧЁТ "
-        ],
-        "words_for_remove":[
-            "ОТЧЁТ ",
-            "№"
-        ],
-        "wrong_statmets":[
-            "Ответственный за оформление протокола:"
-        ]
-    },
-
-    "define_date_prot": {
-        "key_words":[
-            "Дата начала анализа"
-        ],
-        "words_for_remove":[
-            "Дата начала анализа"
-        ],
-        "wrong_statmets":[
-           
-        ]
-    },
-    "define_order_number": {
-        "key_words":[
-            "Заказ:"
-        ],    
-        "words_for_remove": [
-            "Заказ:",
-            ":",
-            "№"
-        ],    
-        "wrong_statmets" :[
-            "Выполнен Заказчиком , который несет ответственность за правильность пробоотбора",
-            "Выполнен Заказчиком, который несет ответственность за правильность пробоотбора",
-            "Заказчик:"
-        ]
-    
-    },
-    "samples_template":[
-        "SRK19401001",
-        "PES401181",
-        "ZUAA-A2000198493",
-        "SLS7303235"
-    ],
-    "elements":{
-        "AUC":{
-            "unit": "PPM",
-            "find":["Золото, г/т"],
-            "finded": [],
-            "two defintion": 0
+    "PROT":{
+        "NUMBER": {
+            "SEARCH": ["ОТЧЁТ №"],
+            "AFTER": ["№"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "88-21ц",
+                    "100-21ц"
+                ]
         },
-        "AGC":{
-            "unit": "PPM",
-            "find":["Серебро, г/т"],
-            "finded": [],
-            "two defintion": 0
+        "DATE":{
+            "SEARCH": ["Дата окончания анализа"],
+            "AFTER": ["анализа"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "00/00/0000"
+                ]
         }
     },
-    "LAB_METHOD": "PACY",
-    "GENERIC_METHOD": "PACY"
+    "ORDER":{
+        "NUMBER": {
+            "SEARCH": ["Заказ:"],
+            "AFTER": ["№"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "02 СЯХТМ00511",
+                    "02-СЯХТМ00511",
+                    "02 СЯХТМ0511",
+                    "02-СЯХТМ0511"
+                ]
+        },
+        "DATE":{
+            "SEARCH": ["Дата поступления проб"],
+            "AFTER": ["проб"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "00/00/0000"
+                ]
+        }
+    },
+    "SAMPLE":{
+        "TEMPLATE": [
+            "ZUAA-A2100407307",
+            "3060006"
+        ]
+    },
+    "ELEMENTS": {
+        "AUC":{
+            "HEADER": ["Золото, г/т"],
+            "SUBHEADER": {
+                "HEADER": ["Результат анализа цианированием"],
+                "SUBHEADER": "0"
+            },
+            "UNIT": "PPM",
+            "LAB_METHOD": "PACY",
+            "GENERIC_METHOD": "PACY",
+            "RULES": [
+                {
+                    "compare": "full", 
+                    "operation": "replace", 
+                    "value": "**",
+                    "replaceValue":"",
+                    "exlcude": 1
+                },
+                {
+                    "compare": "include", 
+                    "operation": "devide", 
+                    "value": "<",
+                    "replaceValue":"2",
+                    "exlcude": 0
+                },
+                {
+                    "compare": "include", 
+                    "operation": "replace", 
+                    "value": ">",
+                    "replaceValue":"",
+                    "exlcude": 0
+                }
+            ]
+        },
+        "AGC":{
+            "HEADER": ["Серебро, г/т"],
+            "SUBHEADER": {
+                "HEADER": ["Результат анализа цианированием"],
+                "SUBHEADER": "0"
+            },
+            "UNIT": "PPM",
+            "LAB_METHOD": "PACY",
+            "GENERIC_METHOD": "PACY",
+            "RULES": [
+                {
+                    "compare": "full", 
+                    "operation": "replace", 
+                    "value": "**",
+                    "replaceValue":"",
+                    "exlcude": 1
+                },
+                {
+                    "compare": "include", 
+                    "operation": "devide", 
+                    "value": "<",
+                    "replaceValue":"2",
+                    "exlcude": 0
+                },
+                {
+                    "compare": "include", 
+                    "operation": "replace", 
+                    "value": ">",
+                    "replaceValue":"",
+                    "exlcude": 0
+                }
+            ]
+        }
+    }
 }
