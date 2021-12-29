@@ -18,7 +18,7 @@ def find_despatch(despatch_id:str):
     if len(df_sample) != 0 or len(df_standart) != 0:
         return df_sample, df_standart, despatch_id
 
-    return None, None
+    return None, None, None
 
 def _find(despatch_id:str):
     sql_sample = f"""

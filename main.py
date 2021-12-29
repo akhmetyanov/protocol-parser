@@ -56,13 +56,14 @@ def main():
         df_samples, df_standart, despatch_id = find_despatch(order_num)
 
         if df_samples is None and df_standart is None:
-            raise Exception(f"Наряд-азказа {order_num} не найден")
+            print(f"Наряд-азказа {order_num} не найден")
+            continue
 
         # составляем датафреймы на основе данных
         result_df = make_res(despatch_id, prot_num, datas, lab, template_name)
         receipt_df = make_receipt(despatch_id, prot_num, prot_date,result_df['GENERIC_METHOD'][0])
 
         result_samples, result_standart = devide_result(df_samples, df_standart, result_df)
-        write_results(result_samples, result_standart)
+        write_results(result_samples, result_standart, receipt_df)
         
 main()
