@@ -7,27 +7,8 @@ from write_to_server import write_results
 
 
 paths = [
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 88-21 ц СЯХТМ к заказу 02 СЯХТМ0511.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 89-21 ц СЯХТМ к заказу 02 СЯХТМ0519.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 90-21 ц СЯХТМ к заказу 02 СЯХТМ0523.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 91-21 ц СЯХТМ к заказу 02 СЯХТМ0483.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 92-21 ц СЯХТМ к заказу 02 СЯХТМ0516.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 94-21 ц СЯХТМ к заказу 02 СЯХТМ0515.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 95-21 ц СЯХТМ к заказу 02 СЯХТМ0513.xlsx",
     r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 96-21 ц СЯХТМ к заказу 02 СЯХТМ0525.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 97-21 ц СЯХТМ к заказу 02 СЯХТМ0551.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 98-21 ц СЯХТМ к заказу 02 СЯХТМ0517.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 99-21 ц СЯХТМ к заказу 02 СЯХТМ0518.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 100-21 ц СЯХТМ к заказу 02 СЯХТМ0485.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 102-21 ц СЯХТМ к заказу 02 СЯХТМ0502.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 103-21 ц СЯХТМ к заказу 02 СЯХТМ0492.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 104-21 ц СЯХТМ к заказу 02 СЯХТМ0490.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 105-21 ц СЯХТМ к заказу 02 СЯХТМ0491.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 106-21 ц СЯХТМ к заказу 02 СЯХТМ0510.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 107-21 ц СЯХТМ к заказу 02 СЯХТМ0493.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 108-21 ц СЯХТМ к заказу 02 СЯХТМ0490.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 109-21 ц СЯХТМ к заказу 02 СЯХТМ0491.xlsx",
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 110-21 ц СЯХТМ к заказу 02 СЯХТМ0489.xlsx"
+    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Отчет 97-21 ц СЯХТМ к заказу 02 СЯХТМ0551.xlsx"
 ]
 
 lab = 'LB40'
