@@ -12,9 +12,9 @@ def write_results(df_samples: pd.DataFrame, df_standart: pd.DataFrame, st_receip
 
     if uploaded: return
 
-    # df_samples.to_sql("BUFFER_ST_RESULT", eng, if_exists='append', index=None)
-    # df_standart.to_sql("BUFFER_ST_RESULT_STANDARD", eng, if_exists='append', index=None)
-    # st_receipt.to_sql("BUFFER_ST_RECEIPT", eng, if_exists='append', index=None)
+    df_samples.to_sql("BUFFER_ST_RESULT", eng, if_exists='append', index=None)
+    df_standart.to_sql("BUFFER_ST_RESULT_STANDARD", eng, if_exists='append', index=None)
+    st_receipt.to_sql("BUFFER_ST_RECEIPT", eng, if_exists='append', index=None)
 
 def check(despatch_id: str, lab_job_no: str):
     sql = f"""
