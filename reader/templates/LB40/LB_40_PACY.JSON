@@ -1,0 +1,64 @@
+{
+    "define_prot_number":{
+        "key_words":[
+            "ОТЧЁТ "
+        ],
+        "words_for_remove":[
+            "ОТЧЁТ ",
+            "№"
+        ],
+        "wrong_statmets":[
+            "Ответственный за оформление протокола:"
+        ]
+    },
+
+    "define_date_prot": {
+        "key_words":[
+            "Дата начала анализа"
+        ],
+        "words_for_remove":[
+            "Дата начала анализа"
+        ],
+        "wrong_statmets":[
+           
+        ]
+    },
+    "define_order_number": {
+        "key_words":[
+            "Заказ:"
+        ],    
+        "words_for_remove": [
+            "Заказ:",
+            ":",
+            "№"
+        ],    
+        "wrong_statmets" :[
+            "Выполнен Заказчиком , который несет ответственность за правильность пробоотбора",
+            "Выполнен Заказчиком, который несет ответственность за правильность пробоотбора",
+            "Заказчик:"
+        ]
+    
+    },
+    "samples_template":[
+        "SRK19401001",
+        "PES401181",
+        "ZUAA-A2000198493",
+        "SLS7303235"
+    ],
+    "elements":{
+        "AUC":{
+            "unit": "PPM",
+            "find":["Золото, г/т"],
+            "finded": [],
+            "two defintion": 0
+        },
+        "AGC":{
+            "unit": "PPM",
+            "find":["Серебро, г/т"],
+            "finded": [],
+            "two defintion": 0
+        }
+    },
+    "LAB_METHOD": "PACY",
+    "GENERIC_METHOD": "PACY"
+}
