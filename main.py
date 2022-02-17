@@ -5,13 +5,18 @@ from result import make_res, make_receipt, devide_result
 from despath import find_despatch
 from write_to_server import write_results
 
-
 paths = [
-    r"C:\Users\AkhmetyanovIR\Desktop\Protocols\Протокол №67-21СЕРЕБ.xlsx"
+    r"C:\Users\AkhmetyanovIR\Desktop\PE_протокол\Сера, мышьяк\ААА\Протокол № 7-22ПЕЩ.ИК к заказу № 11-ПЕЩ000279.xlsx",
+    r"C:\Users\AkhmetyanovIR\Desktop\PE_протокол\Сера, мышьяк\ААА\Протокол № 6-22ПЕЩ.ИК к заказу № 11-ПЕЩ000278.xlsx",
+    r"C:\Users\AkhmetyanovIR\Desktop\PE_протокол\Сера, мышьяк\ААА\Протокол № 5-22ПЕЩ.ИК к заказу № 11-ПЕЩ000281.xlsx",
+    r"C:\Users\AkhmetyanovIR\Desktop\PE_протокол\Сера, мышьяк\ААА\Протокол № 1-22ПЕЩ.ИК к заказу № 11-ПЕЩ000267.xlsx",
+    r"C:\Users\AkhmetyanovIR\Desktop\PE_протокол\Сера, мышьяк\ААА\Протокол № 2-22ПЕЩ.ИК к заказу № 11-ПЕЩ000268.xlsx",
+    r"C:\Users\AkhmetyanovIR\Desktop\PE_протокол\Сера, мышьяк\ААА\Протокол № 3-22ПЕЩ.ИК к заказу № 11-ПЕЩ000271.xlsx",
+    r"C:\Users\AkhmetyanovIR\Desktop\PE_протокол\Сера, мышьяк\ААА\Протокол № 4-22ПЕЩ.ИК к заказу № 11-ПЕЩ000272.xlsx"
 ]
 
 lab = 'LB40'
-template_name = 'LB_40_PA'
+template_name = 'LB40_MPAL'
 
 def main():
     for path in paths:
@@ -35,14 +40,50 @@ def main():
         df_samples, df_standart, despatch_id = find_despatch(order_num)
 
         if df_samples is None and df_standart is None:
-            print(f"Наряд-азказа {order_num} не найден")
-            continue
+            print(f"Наряд-заказа {order_num} не найден")
+            print(f"Содать нз {order_num} на основе протокола?")
+            
+            def get_user_choice():
+                user_input = input("Y - создать, N - пропустить: ")
+                if str(user_input).lower() not in ["y", "n"]: user_input = get_user_choice()
+                return user_input
+
+            user_input = get_user_choice()
+
+            if user_input == 'y':
+                from find_project import find_project
+                
+
+                def get_user_project():
+                    user_input = str(input("Введите код проекта: "))
+                    project = find_project(user_input)
+
+                    if project is None:
+                        print(f"Проект {user_input} не найдет в таблице GB_PROJECT")
+                        get_user_project()
+
+                    return user_input
+            
+                user_input = str(get_user_project()).upper()
+
+                samples_list = [d['ns'] for d in datas]
+                samples_list = list(set(samples_list))
+
+                from create_despath import create_despath
+                create_despath(user_input, order_num, order_date, prot_num, lab, samples_list)
+
+                df_samples, df_standart, despatch_id = find_despatch(order_num)
+
+            else:        
+                continue
 
         # составляем датафреймы на основе данных
         result_df = make_res(despatch_id, prot_num, datas, lab, template_name)
         receipt_df = make_receipt(despatch_id, prot_num, prot_date,result_df['GENERIC_METHOD'][0])
 
         result_samples, result_standart = devide_result(df_samples, df_standart, result_df)
+        result_samples['TEXT_RULE'] = [''] * len(result_samples)
+        result_standart['TEXT_RULE'] = [''] * len(result_standart)
         write_results(result_samples, result_standart, receipt_df)
         
 main()

@@ -3,7 +3,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from reader.read_template import read_template
 
 def read(addresses: list, path: str):
-    wb = load_workbook(path)
+    wb = load_workbook(path, data_only=True)
     
     datas = []
 

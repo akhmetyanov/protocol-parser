@@ -1,0 +1,100 @@
+{
+    "PROT":{
+        "NUMBER": {
+            "SEARCH": ["ОТЧЕТ №", "ПРОТОКОЛ №"],
+            "AFTER": ["№"],
+            "WRONG": ["страница"],
+            "TEMPLATE": 
+                [
+                    "67-21СЕРЕБ",
+                    "1-22ПЕЩ.ИК",
+                    "9-22ПЕЩ.РФА",
+                    "7-22ПЕЩ.ИК"
+                ]
+        },
+        "DATE":{
+            "SEARCH": ["Дата окончания анализа:", "Дата окончания анализа"],
+            "AFTER": ["анализа:", "анализа"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "00/00/0000",
+                    "00.00.0000"
+                ]
+        }
+    },
+    "ORDER":{
+        "NUMBER": {
+            "SEARCH": ["Заказ"],
+            "AFTER": ["№"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "01СЕРЕБ0349",
+                    "11-ПЕЩ000267"
+                ]
+        },
+        "DATE":{
+            "SEARCH": ["Дата поступления проб:", "Дата поступления проб"],
+            "AFTER": ["проб:", "проб"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "00/00/0000",
+                    "00.00.0000"
+                ]
+        }
+    },
+    "SAMPLE":{
+        "TEMPLATE": [
+            "ZUAA-A2100407307",
+            "ZUAA-A2100421371",
+            "ZUAA-A2200517162",
+            "3060006",
+            "SLS5903147",
+            "SLSGG2036"
+        ]
+    },
+    "ELEMENTS": {
+        "S":{
+            "HEADER": ["Сера общая, %"],
+            "SUBHEADER": {
+                "HEADER": ["Результат анализа"],
+                "SUBHEADER": "0"
+            },
+            "UNIT": "PERCENT",
+            "LAB_METHOD": "IKS",
+            "GENERIC_METHOD": "IKS",
+            "RULES": [
+                {
+                    "compare": "full", 
+                    "operation": "replace", 
+                    "value": "**",
+                    "replaceValue":"",
+                    "exlcude": 1
+                },
+                {
+                    "compare": "include", 
+                    "operation": "replace", 
+                    "value": "менее",
+                    "replaceValue":"<",
+                    "exlcude": 0
+                },
+                {
+                    "compare": "include", 
+                    "operation": "devide", 
+                    "value": "<",
+                    "replaceValue":"2",
+                    "exlcude": 0
+                },
+                {
+                    "compare": "include", 
+                    "operation": "replace", 
+                    "value": ">",
+                    "replaceValue":"",
+                    "exlcude": 0
+                }
+            ]
+        }
+    }
+}

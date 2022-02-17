@@ -1,0 +1,85 @@
+{
+    "PROT":{
+        "NUMBER": {
+            "SEARCH": ["Протокол:"],
+            "AFTER": ["Протокол:"],
+            "WRONG": ["страница"],
+            "TEMPLATE": 
+                [
+                    "67-21СЕРЕБ",
+                    "2017-22"
+                ]
+        },
+        "DATE":{
+            "SEARCH": ["Дата получения протокола:"],
+            "AFTER": ["протокола:"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "00/00/0000",
+                    "00.00.0000"
+                ]
+        }
+    },
+    "ORDER":{
+        "NUMBER": {
+            "SEARCH": ["Наряд-заказ:"],
+            "AFTER": ["Наряд-заказ:"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "01СЕРЕБ0349",
+                    "803"
+                ]
+        },
+        "DATE":{
+            "SEARCH": ["Дата наряд заказа:"],
+            "AFTER": ["заказа:"],
+            "WRONG": [],
+            "TEMPLATE": 
+                [
+                    "00/00/0000",
+                    "00.00.0000"
+                ]
+        }
+    },
+    "SAMPLE":{
+        "TEMPLATE": [
+            "PE455001"
+        ]
+    },
+    "ELEMENTS": {
+        "AU":{
+            "HEADER": ["Au. г/т"],
+            "SUBHEADER": "0",
+            "UNIT": "PPM",
+            "LAB_METHOD": "PAA",
+            "GENERIC_METHOD": "PAA",
+            "RULES": [
+                {
+                    "compare": "include", 
+                    "operation": "devide", 
+                    "value": "<",
+                    "replaceValue":"2",
+                    "exlcude": 0
+                }
+            ]
+        },
+        "AG":{
+            "HEADER": ["Ag. г/т"],
+            "SUBHEADER": "0",
+            "UNIT": "PPM",
+            "LAB_METHOD": "PAA",
+            "GENERIC_METHOD": "PAA",
+            "RULES": [
+                {
+                    "compare": "include", 
+                    "operation": "devide", 
+                    "value": "<",
+                    "replaceValue":"2",
+                    "exlcude": 0
+                }
+            ]
+        }
+    }
+}

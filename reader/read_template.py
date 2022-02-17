@@ -23,6 +23,10 @@ def template_to_mask(word: str):
 
 def str_to_date(s_date: str):
     if (s_date == None): return None
-    if '/' in s_date: _date = datetime.strptime(s_date, '%d/%m/%Y')
+    if '/' in s_date:
+        try:
+            _date = datetime.strptime(s_date, '%d/%m/%Y')
+        except:
+            _date = datetime.strptime(s_date, '%m/%d/%Y')
     if '.' in s_date: _date = datetime.strptime(s_date, '%d.%m.%Y')
     return _date

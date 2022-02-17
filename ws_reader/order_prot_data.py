@@ -8,7 +8,7 @@ from reader import available_sheets_name
 
 def find_order_prot_data(path: str, lab: str, template_name: str):
     template = read_template(lab, template_name)
-    wb = load_workbook(path)
+    wb = load_workbook(path, data_only=True)
     
     for ws in wb.worksheets:
         if ws.title not in available_sheets_name: continue

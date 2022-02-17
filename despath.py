@@ -21,6 +21,7 @@ def find_despatch(despatch_id:str):
     return None, None, None
 
 def _find(despatch_id:str):
+    if despatch_id is None: raise Exception("despatch_id is None")
     sql_sample = f"""
     select * from ST_DESPATCH_SAMPLE
     where DESPATCH_ID like '%{despatch_id.strip()}%'

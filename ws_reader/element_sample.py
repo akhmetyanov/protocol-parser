@@ -1,12 +1,13 @@
 import json
 from openpyxl import load_workbook
 from openpyxl.worksheet.worksheet import Worksheet
+from sqlalchemy import true
 from reader import available_sheets_name
 from reader.read_template import read_template, template_to_mask
 
 def find_element_sample_adress(path: str, lab: str, template_name: str):
     # Поиск в протколе заголовка колонны замеров по элементу
-    wb = load_workbook(path)
+    wb = load_workbook(path, data_only=True)
     template = read_template(lab, template_name)
     for ws in wb.worksheets:
         if ws.title not in available_sheets_name: continue
@@ -77,9 +78,10 @@ def find_samples(ws: Worksheet, r: int, c:int, template: json):
     _row = -1
     _flag = False
     for row in range(r, ws.max_row):
-        for col in range(c, 1, -1):
-            if ws.cell(row, col).value is None: continue
-            value = str(ws.cell(row, col).value).strip().upper()
+        for col in range(c, 0, -1):
+            value = ws.cell(row, col).value
+            if value is None: continue
+            value = str(value).strip().upper()
             value = template_to_mask(value)
             
             for samp_temp in template['TEMPLATE']:
@@ -90,6 +92,7 @@ def find_samples(ws: Worksheet, r: int, c:int, template: json):
                     break
             
             if _flag: break
+
         if _flag: break
 
     if _column == -1: return None
